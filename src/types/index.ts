@@ -1,3 +1,5 @@
+export type MayBe<T> = T | null;
+export type AuthId = string;
 export interface Picture {
   small: string;
   medium: string;
@@ -60,4 +62,3 @@ export interface GroupBalance {
   currency_code: string;
   amount: string;
 }
-

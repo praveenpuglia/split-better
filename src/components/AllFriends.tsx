@@ -1,8 +1,7 @@
 import { Friend } from '@/types';
 import { myAPI } from '@/util/auth';
 import { Avatar, Box, Heading } from '@chakra-ui/react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const AllFriends = () => {
   const [friends, setFriends] = useState<Friend[]>([]);

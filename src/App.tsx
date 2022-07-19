@@ -1,16 +1,26 @@
-import Nav from '@/components/base/Nav';
-import { Icon } from '@chakra-ui/react';
-import AllFriends from './components/friends/AllFriends';
-import { MdGroups } from 'react-icons/md';
+import Nav from '@/components/Nav';
+import { Route, Routes } from 'react-router-dom';
+import { LandingPage } from '@/components/LandingPage';
+import { Home } from '@/components/Home';
+import { Heading } from '@chakra-ui/react';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 
-function App() {
+export const App = () => {
   return (
     <div className="App">
       <Nav></Nav>
-      {/* <AllFriends></AllFriends> */}
-      <Icon as={MdGroups}></Icon>
+      <Routes>
+        <Route index element={<LandingPage />} />
+        <Route
+          path="home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Heading>404!</Heading>} />
+      </Routes>
     </div>
   );
-}
-
-export default App;
+};
