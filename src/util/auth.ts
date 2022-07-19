@@ -26,10 +26,16 @@ export const getUser = async (authId: AuthId): Promise<MayBe<User>> => {
   return myAPI
     .auth(authId)
     .get('get_current_user')
-    .then((res) => res.json())
+    .then((res) => {
+      const data = res.json();
+      if (res.status >= 400) {
+        throw new Error("This sucks! I shouldn't have to handle it. ");
+      }
+      return data;
+    })
     .then((data: { user: User }) => data.user)
     .catch((e) => {
       console.error(e);
-      return null;
+      throw e;
     });
 };

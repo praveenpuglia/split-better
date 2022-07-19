@@ -65,18 +65,20 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
     setUser,
   };
   let content: ReactNode;
-  switch (status) {
-    case 'IDLE':
-    case 'PENDING':
-      content = <AppLoader></AppLoader>;
-    case 'ERROR':
-      content = <Alert status="error">Something went wrong!</Alert>;
-    case 'SUCCESS':
-      content = (
-        <AppContext.Provider value={providerValue}>
-          {children}
-        </AppContext.Provider>
-      );
+  console.debug({ status });
+
+  if (status === 'IDLE' || status === 'PENDING') {
+    content = <AppLoader></AppLoader>;
+  }
+  if (status === 'ERROR') {
+    content = <Alert status="error">Something went wrong!</Alert>;
+  }
+  if (status === 'SUCCESS') {
+    content = (
+      <AppContext.Provider value={providerValue}>
+        {children}
+      </AppContext.Provider>
+    );
   }
   return <>{content}</>;
 };
